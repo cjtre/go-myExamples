@@ -1,0 +1,38 @@
+The life time of a variable is determined only by whether or not it is reachable.
+
+The compiler may choose to allocate variables on the heap or on the stack.
+
+var global *int
+func f() {
+    var x int
+    x = 1
+    global &x
+}
+
+In the code above, x must be heap-allocated becuase it is still reachable from the variable
+global after f has returned.
+
+Despite being declared as a local variable, we say, x escapes from f.
+
+func g(){
+    y:= new(int)
+    y = 1
+}
+
+conversely, when g returns, the variable *y becomes unreacheable and can be recycled.
+
+It is good to keep in mind the idea of escaping during performance optimization as each variable that 
+escapes requires an extra memory allocation.
+
+A declaration's lexical block determines its scope. 
+
+When the compiler encounters a reference to a name, it looks for a declaration, starting with the innermost
+block. The innermost declaration will be found first.
+
+func f(){}
+var g = 'g'
+
+func main(){
+    f := "f"
+    fmt.Println(f) // local var f shadows package level function f.
+}

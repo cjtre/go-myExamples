@@ -1,0 +1,19 @@
+Stacks - a data structure used to store a collection of objects
+
+When an object is added to a stack, it is placed on the top, above all previously entered items.
+
+Items can be removed from only the top of the stack.
+
+We say that items are pushed onto a stack and are popped off the stack.
+
+A stack in which items are removed from the top is considered a LIFO - Last In First Out stack. 
+A good analogy would be a deck of cards.
+
+FIFO stacks, on the other hand, is first in first out. Items are removed from the bottom.
+
+LIFO stacks are used to retrieve recently used objects from a cache.
+
+FIFO stacks used to ensure data is retrieved in the order it was entered. A good example would be for
+processing data in a queue.
+
+If a stack runs out of memory, it will cause a stack overflow.
