@@ -1,4 +1,4 @@
-//The purpose of this programme is to show how UNSTRUCTURED* data can be decoded into a map.
+//The purpose of this programme is to show how STRUCTURED json can be read into a struct.
 package main
 
 import (
@@ -13,6 +13,8 @@ type FruitBasket struct {
     Id      int64 `json:"ref"`
 }
 
+
+
 func main(){
 	
 	file, err := ioutil.ReadFile("test.json")
@@ -20,15 +22,12 @@ func main(){
 		fmt.Println(err)
 	}
 
-	var result []map[string] interface{}
+	var baskets []FruitBasket
+	json.Unmarshal([]byte(file), &baskets)
+	
+	fmt.Printf("baskets: %+v\n", baskets)
+	
 
-	err = json.Unmarshal([]byte(file), &result)
-	if err != nil {
-		fmt.Println(err)
-	}
 
-	for key, value := range result {
-		fmt.Println(key, value)
-	}
 
 }
