@@ -1,46 +1,33 @@
+//The purpose of this programme is to show how we can read data in the form of json
+//into a struct.
 package main
 
 import(
-	"os"
-	"log"
-	"text/template"
+	"fmt"
+	"encoding/json"
+	"io/ioutil"
 )
 
-var tpl *template.Template
-
-func init(){
-	tpl = template.Must(template.ParseFiles("tpl.gohtml"))
+type Countries struct {
+	Countries []Country
 }
 
-type Person struct {
+type Country struct {
 	Name string
-	Age int
+	Capital string
 }
 
 func main(){
-
-	p1 := Person{
-		Name: "Wang Yu",
-		Age: 33,
+	file, err := ioutil.ReadFile("data.json")
+	if err != nil {
+		fmt.Println(err)
 	}
 
-	p2 := Person{
-		Name: "Christopher Tregear",
-		Age: 35,
-	}
+	var payload Countries{}
 
-	p3 := Person{
-		Name: "Ethan Tregear",
-		Age: 1,
-	}
-
-	people := []Person{p1, p2, p3}
-
-	err := tpl.Execute(os.Stdout, people)
-	if err != nil{
-		log.Fatalln(err)
-	}
-
+	err = json.Unmarshal([]byte(file), &payload)
 	
-}
+	m := payload.(map[string]interface{})
+	fmt.Println(m)
 
+}
